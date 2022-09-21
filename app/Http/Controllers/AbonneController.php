@@ -51,6 +51,8 @@ class AbonneController extends Controller
                     'adresse'=>$request['adresse'],
                 ]);
             }
+
+            return redirect('/login');
     }
 
     /**
