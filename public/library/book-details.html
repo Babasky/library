@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Livre - Bibliotech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="font-sans bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 border-r border-gray-200 bg-white">
+                <div class="flex items-center h-16 px-6 border-b border-gray-200">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="book" class="text-indigo-600 mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">Bibliotech</span>
+                    </a>
+                </div>
+                <div class="flex flex-col flex-grow overflow-y-auto">
+                    <div class="px-6 py-4">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Administration</p>
+                    </div>
+                    <nav class="flex-1 px-2 space-y-1">
+                        <a href="admin.html" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-md">
+                            <i data-feather="home" class="mr-3"></i>
+                            Tableau de bord
+                        </a>
+                        <a href="book-management.html" class="sidebar-item active flex items-center px-4 py-3 text-sm font-medium text-gray-900 rounded-md">
+                            <i data-feather="book" class="mr-3 text-indigo-600"></i>
+                            Gestion des livres
+                        </a>
+                        <a href="user-management.html" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-md">
+                            <i data-feather="users" class="mr-3"></i>
+                            Gestion des utilisateurs
+                        </a>
+                        <a href="loan-management.html" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-md">
+                            <i data-feather="clock" class="mr-3"></i>
+                            Gestion des emprunts
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top Navigation -->
+            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200 bg-white">
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+                <div class="flex-1 flex justify-between items-center">
+                    <h1 class="text-lg font-semibold text-gray-900">Détails du livre</h1>
+                    <div class="flex items-center space-x-4">
+                        <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center">
+                            <i data-feather="edit" class="mr-2"></i>
+                            Modifier
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center space-x-2">
+                                <img class="w-8 h-8 rounded-full" src="http://static.photos/people/200x200/3" alt="Admin">
+                                <span class="hidden md:inline text-sm font-medium">Admin</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="md:flex">
+                            <!-- Book Cover -->
+                            <div class="md:w-1/3 mb-8 md:mb-0 md:pr-8">
+                                <img src="http://static.photos/education/400x600/1" alt="Book cover" class="w-full rounded-lg shadow-md">
+                            </div>
+                            
+                            <!-- Book Details -->
+                            <div class="md:w-2/3">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-2">Le Petit Prince</h2>
+                                <p class="text-lg text-gray-600 mb-4">Antoine de Saint-Exupéry</p>
+                                
+                                <div class="grid grid-cols-2 gap-4 mb-6">
+                                    <div>
+                                        <p class="text-sm text-gray-500">ISBN</p>
+                                        <p class="text-gray-900">978-2070408504</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Éditeur</p>
+                                        <p class="text-gray-900">Gallimard</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Année de publication</p>
+                                        <p class="text-gray-900">1943</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Nombre de pages</p>
+                                        <p class="text-gray-900">96</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Catégorie</p>
+                                        <p class="text-gray-900">Roman</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Statut</p>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Disponible</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <p class="text-sm text-gray-500">Description</p>
+                                    <p class="text-gray-700">Le Petit Prince est une œuvre de langue française, la plus connue d'Antoine de Saint-Exupéry. Publié en 1943 à New York simultanément en anglais et en français, c'est un conte poétique et philosophique sous l'apparence d'un conte pour enfants.</p>
+                                </div>
+                                
+                                <div class="flex space-x-4">
+                                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center">
+                                        <i data-feather="book-open" class="mr-2"></i>
+                                        Enregistrer un emprunt
+                                    </button>
+                                    <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition flex items-center">
+                                        <i data-feather="printer" class="mr-2"></i>
+                                        Imprimer la fiche
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   

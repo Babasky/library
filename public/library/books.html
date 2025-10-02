@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livres - Bibliotech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .search-box {
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1), 0 2px 4px -1px rgba(79, 70, 229, 0.06);
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.2);
+        }
+
+        .pagination .active {
+            background-color: #4f46e5;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="book" class="text-indigo-600 mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">Bibliotech</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-900 hover:text-indigo-600 font-medium">Accueil</a>
+                    <a href="books.html" class="text-indigo-600 font-medium">Livres</a>
+                    <a href="#" class="text-gray-900 hover:text-indigo-600 font-medium">À propos</a>
+                    <a href="login.html"
+                        class="px-4 py-2 rounded-md bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition">Connexion</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Accueil</a>
+                <a href="books.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">Livres</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">À
+                    propos</a>
+                <a href="login.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">Connexion</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Search and Filter Section -->
+        <div class="mb-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">Notre collection de livres</h1>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm search-box">
+                <div class="flex flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
+                    <!-- Search Input -->
+                    <div class="flex-1">
+                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Rechercher</label>
+                        <div class="relative">
+                            <input type="text" id="search" placeholder="Titre, auteur, ISBN..."
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i data-feather="search" class="text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="w-full md:w-64">
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
+                        <select id="category"
+                            class="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <option>Toutes catégories</option>
+                            <option>Roman</option>
+                            <option>Science-fiction</option>
+                            <option>Biographie</option>
+                            <option>Histoire</option>
+                            <option>Science</option>
+                        </select>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="w-full md:w-48">
+                        <label for="availability"
+                            class="block text-sm font-medium text-gray-700 mb-1">Disponibilité</label>
+                        <select id="availability"
+                            class="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <option>Tous</option>
+                            <option>Disponible</option>
+                            <option>Emprunté</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center justify-center">
+                        <i data-feather="filter" class="mr-2"></i>
+                        Filtrer
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
+            <!-- Book Card 1 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/6" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Dune</h3>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Frank Herbert</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Science-fiction</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        <a href="book-details.html"
+                            class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 2 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/7" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Le Seigneur des Anneaux</h3>
+                        <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Emprunté</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">J.R.R. Tolkien</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Fantasy</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button class="px-3 py-1 bg-gray-300 text-gray-600 text-sm rounded cursor-not-allowed"
+                            disabled>Indisponible</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 3 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/8" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Fondation</h3>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Isaac Asimov</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Science-fiction</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 4 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/9" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Les Misérables</h3>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Victor Hugo</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Classique</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 5 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/10" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Le Comte de Monte-Cristo</h3>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Alexandre Dumas</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Aventure</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 6 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/11" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Orgueil et Préjugés</h3>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Jane Austen</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Romance</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 7 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/12" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Le Nom de la Rose</h3>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Umberto Eco</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Policier</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Card 8 -->
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="http://static.photos/education/320x240/13" alt="Book cover"
+                        class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-semibold text-gray-900">Cent ans de solitude</h3>
+                        <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Emprunté</span>
+                    </div>
+                    <p class="text-gray-600 mb-3">Gabriel García Márquez</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                        <span>Magique réalisme</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button class="px-3 py-1 bg-gray-300 text-gray-600 text-sm rounded cursor-not-allowed"
+                            disabled>Indisponible</button>
+                        <a href="#" class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center">
+            <nav class="flex items-center space-x-2">
+                <a href="#" class="pagination px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50">
+                    <i data-feather="chevron-left" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">1</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md bg-indigo-600 text-white active">2</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">3</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">4</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">5</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50">
+                    <i data-feather="chevron-right" class="w-5 h-5"></i>
+                </a>
+            </nav>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Bibliotech</h3>
+                    <p class="text-gray-400">Votre bibliothèque numérique moderne et accessible.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a></li>
+                        <li><a href="books.html" class="text-gray-400 hover:text-white transition">Livres</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">À propos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Légal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Conditions d'utilisation</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Politique de
+                                confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mentions légales</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i data-feather="mail" class="mr-2"></i> contact@bibliotech.fr
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i data-feather="phone" class="mr-2"></i> +33 1 23 45 67 89
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i data-feather="map-pin" class="mr-2"></i> Paris, France
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 Bibliotech. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i data-feather="facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i data-feather="instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        feather.replace();
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
