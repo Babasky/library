@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+
+	{{ form_errors(registrationForm) }}
+
+
+	<div class="min-h-screen flex items-center justify-center register-gradient">
+		<div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+			<div class="text-center mb-8">
+
+				<h1 class="text-2xl font-bold text-gray-900 mt-4">Inscription</h1>
+				<p class="text-gray-600">Créez votre compte gratuitement</p>
+			</div>
+			{{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}
+			)}}
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				{{ form_row(registrationForm.firstname) }}
+				{{ form_row(registrationForm.lastname) }}
+			</div>
+			<div>
+				{{ form_row(registrationForm.email) }}
+			</div>
+			<div>
+				{{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+			</div>
+			<div>
+				<button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center justify-center">
+					<i data-feather="user-plus" class="mr-2"></i>
+					S'inscrire
+				</button>
+			</div>
+
+			<div class="text-center text-sm text-gray-600">
+				Vous avez déjà un compte ?
+				<a href="login.html" class="text-indigo-600 hover:text-indigo-800">Se
+					                connecter</a>
+			</div>
+			{{ form_end(registrationForm) }}
+
+		</div>
+	</div>
+{% endblock %}
+{% block footer %}{% endblock %}
