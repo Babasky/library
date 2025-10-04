@@ -1,0 +1,35 @@
+<section class="py-16 bg-white" id="books">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-bold text-gray-900 mb-4">Nos livres populaires</h2>
+			<p class="text-lg text-gray-600 max-w-2xl mx-auto">Découvrez notre sélection de livres les plus
+				                    appréciés par nos membres.</p>
+		</div>
+
+		<div
+			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+			{% for book in books %}
+                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                    <img src="{{asset('uploads/books/'~book.image)}}" alt="Book cover" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ book.title }}</h3>
+                        {% for author in book.author %}
+                            <p class="text-gray-600 mb-4">{{ author.fullname }}</p>
+                        {% endfor %}
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Disponible</span>
+                            <button class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+
+		<div class="text-center mt-12">
+			<a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition">
+				Voir tous les livres
+				<i data-feather="arrow-right" class="ml-2"></i>
+			</a>
+		</div>
+	</div>
+</section>
