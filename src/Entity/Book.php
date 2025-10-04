@@ -26,7 +26,7 @@ class Book
     private Collection $author;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $publishedÃ_date = null;
+    private ?\DateTimeImmutable $published_date = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -40,6 +40,9 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -87,14 +90,14 @@ class Book
         return $this;
     }
 
-    public function getPublishedÃDate(): ?\DateTimeImmutable
+    public function getPublishedDate(): ?\DateTimeImmutable
     {
-        return $this->publishedÃ_date;
+        return $this->published_date;
     }
 
-    public function setPublishedÃDate(\DateTimeImmutable $publishedÃ_date): static
+    public function setPublishedDate(\DateTimeImmutable $published_date): static
     {
-        $this->publishedÃ_date = $publishedÃ_date;
+        $this->published_date = $published_date;
 
         return $this;
     }
@@ -143,6 +146,18 @@ class Book
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

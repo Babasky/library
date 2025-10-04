@@ -5,6 +5,7 @@
         <title> Library | {% block title %}Welcome!{% endblock %}</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/feather-icons"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
         <link rel="stylesheet" href="{{asset('library/assets/css/style.css')}}">
         {% block stylesheets %}
         {% endblock %}
@@ -13,7 +14,8 @@
         {% block header %}
             {% include "_partials/_header.html.twig" %}
         {% endblock %}
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
         {% block footer %}
             {% include "_partials/_footer.html.twig" %}
         {% endblock %}
