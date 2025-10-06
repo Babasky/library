@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Search and Filter Section -->
+        <div class="mb-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">Notre collection de livres</h1>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm search-box">
+                <div class="flex flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
+                    <!-- Search Input -->
+                    <div class="flex-1">
+                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Rechercher</label>
+                        <div class="relative">
+                            <input type="text" id="search" placeholder="Titre, auteur, ISBN..."
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i data-feather="search" class="text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="w-full md:w-64">
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
+                        <select id="category"
+                            class="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <option>Toutes catégories</option>
+                            <option>Roman</option>
+                            <option>Science-fiction</option>
+                            <option>Biographie</option>
+                            <option>Histoire</option>
+                            <option>Science</option>
+                        </select>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="w-full md:w-48">
+                        <label for="availability"
+                            class="block text-sm font-medium text-gray-700 mb-1">Disponibilité</label>
+                        <select id="availability"
+                            class="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <option>Tous</option>
+                            <option>Disponible</option>
+                            <option>Emprunté</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center justify-center">
+                        <i data-feather="filter" class="mr-2"></i>
+                        Filtrer
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
+            <!-- Book Card 1 -->
+            {% for book in books %}
+                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="{{asset('uploads/books/'~book.image)}}" alt="Book cover"
+                            class="w-full h-64 object-cover">
+                        {% if book.isnewArrival == true %}
+                            <div class="absolute top-2 right-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+                        {% endif %}
+                        
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-semibold text-gray-900">{{book.title}}</h3>
+                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Disponible</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i data-feather="book" class="mr-1 w-4 h-4"></i>
+                            <span>{{book.category}}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button
+                                class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">Emprunter</button>
+                            <a href="book-details.html"
+                                class="text-indigo-600 text-sm font-medium hover:text-indigo-800">Détails</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center">
+            <nav class="flex items-center space-x-2">
+                <a href="#" class="pagination px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50">
+                    <i data-feather="chevron-left" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">1</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md bg-indigo-600 text-white active">2</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">3</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">4</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md hover:bg-gray-50">5</a>
+                <a href="#" class="pagination px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50">
+                    <i data-feather="chevron-right" class="w-5 h-5"></i>
+                </a>
+            </nav>
+        </div>
+    </main>
+{% endblock %}

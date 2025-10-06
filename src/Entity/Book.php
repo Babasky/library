@@ -44,6 +44,9 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isnewArrival = null;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
@@ -158,6 +161,18 @@ class Book
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function isnewArrival(): ?bool
+    {
+        return $this->isnewArrival;
+    }
+
+    public function setIsnewArrival(?bool $isnewArrival): static
+    {
+        $this->isnewArrival = $isnewArrival;
 
         return $this;
     }
